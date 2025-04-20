@@ -1,3 +1,93 @@
 = Snyk Cleanup Tool
 
-A Simple command-line tool created to help cleanup Snyk orgs.
+A simple command-line tool to help clean up Snyk orgs.
+
+== Running the tool
+
+The latest distribution of our tool is available on the https://github.com/samoylenko/snyk-cleanup-tool/releases[releases] page.
+
+Currently, we only provide a ZIP distribution that requires a xref:installing_java_runtime[configured Java Runtime Environment] in the system.
+
+=== Snyk Authentication
+
+It's always better to use a Snyk API token.
+You can create/grab one at the https://app.snyk.io/account[Snyk account page].
+
+[source,shell]
+----
+./snyk-cleanup-tool --token ${SNYK_TOKEN}
+----
+
+==== Snyk token autodetection (unstable)
+
+We will also attempt to get the Snyk token from your local environment if it is not provided.
+
+But this functionality is not stable - in most cases, Snyk CLI uses an OAuth token by default.
+And while we can perfectly leverage the token in our app, it's shortlived, so you'd need to run something like `snyk container test hello-world` all the time to refresh it for us.
+
+== Display a list of available Snyk orgs
+
+When this app is run without any parameters, it will display the list of available orgs to work with:
+
+[source,shell]
+----
+./snyk-cleanup-tool --token ${SNYK_TOKEN}
+----
+
+== Display list of projects in a selected Snyk org
+
+You can use both org ID or slug to select an org to work with. The following command will display the list of projects in your org and the date of the last time Snyk CLI monitored them:
+
+[source,shell]
+----
+./snyk-cleanup-tool --token ${SNYK_TOKEN} ${SNYK_ORG}
+----
+
+== Cleanup old projects from a selected Snyk org
+
+Add the `--delete` command line option to delete projects that were monitored on or before a selected date. For example. For example:
+
+[source,shell]
+----
+./snyk-cleanup-tool --token ${SNYK_TOKEN} ${SNYK_ORG} --delete 2022-03-08
+----
+
+== Cleanup old targets from a selected Snyk org
+
+After deleting projects, Snyk doesn’t automatically delete targets that contain these projects. To look up empty targets and delete them, use the `--targets` flag in your command:
+
+To just clean up empty targets, select an org:
+
+[source,shell]
+----
+./snyk-cleanup-tool --token ${SNYK_TOKEN} ${SNYK_ORG} --targets
+----
+
+To automatically clean up targets after deleting some projects:
+
+[source,shell]
+----
+./snyk-cleanup-tool --token ${SNYK_TOKEN} ${SNYK_ORG} --delete 2022-03-08 --targets
+----
+
+[#installing_java_runtime]
+== Installing Java Runtime
+
+*Windows users*:
+
+Use Winget in Command Prompt:
+
+[source,shell]
+----
+winget install Azul.Zulu.21.JRE
+----
+
+*All other users*:
+
+Use https://sdkman.io/install/[SDKMAN!]
+
+[source,shell]
+----
+curl -s "https://get.sdkman.io" | bash
+sdk install java 21.0.6-zulu
+----
