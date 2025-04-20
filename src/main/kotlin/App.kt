@@ -36,7 +36,7 @@ class ClientSnykCli : CliktCommand() {
     private val token by option()
     private val org by argument().optional()
     private val delete by option()
-    private val targets by option().flag(default = true)
+    private val targets by option().flag()
 
     @OptIn(ExperimentalUuidApi::class)
     override fun run() = runBlocking {
