@@ -1,0 +1,3 @@
+= Snyk Cleanup Tool
+
+A Simple command-line tool created to help cleanup Snyk orgs.
