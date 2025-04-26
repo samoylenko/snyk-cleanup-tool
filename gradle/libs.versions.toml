@@ -1,5 +1,5 @@
 [versions]
-client-snyk = "0.1.0-SNAPSHOT"
+client-snyk = "0.1.0"
 clikt = "5.0.+"
 junit = "5.9.+"
 kotlin = "2.1.+"
