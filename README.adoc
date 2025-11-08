@@ -89,5 +89,5 @@ Use https://sdkman.io/install/[SDKMAN!]
 [source,shell]
 ----
 curl -s "https://get.sdkman.io" | bash
-sdk install java 21.0.6-zulu
+sdk install java 21.0.9-zulu
 ----

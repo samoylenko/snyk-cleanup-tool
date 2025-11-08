@@ -1,10 +1,10 @@
 [versions]
-client-snyk = "0.1.2-SNAPSHOT"
+client-snyk = "0.1.+"
 clikt = "5.0.+"
 junit = "5.9.+"
 kotlin = "2.2.+"
 kotlinx-coroutines = "1.9.+"
-logback = "1.5.18"
+logback = "1.5.+"
 
 [plugins]
 kotlin-plugin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
